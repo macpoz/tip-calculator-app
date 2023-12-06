@@ -30,7 +30,7 @@ Users should be able to:
 
 ### Links
 
-- [Solution](https://macpoz.github.io/tip-calculator-app/
+- [Solution](https://macpoz.github.io/tip-calculator-app/)
 
 ## My process
 
