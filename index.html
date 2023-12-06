@@ -15,7 +15,7 @@
 
 <div class="container">
     <header>
-        <img src="/images/logo.svg" alt="Splitter logo" class="logo">
+        <img src="./images/logo.svg" alt="Splitter logo" class="logo">
     </header>
     <main x-data="{
         bill: null,
@@ -75,7 +75,7 @@
             <div class="bill-container">
                 <label for="bill">Bill</label>
                 <div class="input-container">
-                    <img src="images/icon-dollar.svg" alt="">
+                    <img src="./images/icon-dollar.svg" alt="">
                     <input type="text" class="input-field" name="bill" id="bill" x-model="bill" @change="calcTip()" placeholder="0">
                 </div>
             </div>
@@ -101,7 +101,7 @@
                     <span class="error-label" x-show="peopleError">Can't be zero</span>
                 </div>
                 <div class="input-container" :class="peopleError ? 'error' : ''">
-                    <img src="images/icon-person.svg" alt="">
+                    <img src="./images/icon-person.svg" alt="">
                     <input type="text" class="input-field" name="people" id="people" x-model="people" @change="calcTip()" placeholder="0">
                 </div>
 
