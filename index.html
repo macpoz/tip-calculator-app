@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <title>Frontend Mentor | Tip calculator app</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <img src="/images/logo.svg" alt="Splitter logo" class="logo">
+    </header>
+    <main x-data="{
+        bill: null,
+        people: null,
+        peopleError: false,
+        tip: 0,
+        customTip: null,
+        tipAmount: 0,
+        tipAmountPerPeople: 0,
+        total: 0,
+        get tipPerPeople() {
+            if (this.tipAmountPerPeople > 0) {
+                return '$' + parseFloat(this.tipAmountPerPeople).toFixed(2);
+            }
+            return '$0.00'
+        },
+        get totalAmount() {
+            if (this.total > 0) {
+                return '$' + parseFloat(this.total).toFixed(2);
+            }
+            return '$0.00'
+        },
+        get resetStatus(){
+            return this.total<=0;
+        },
+        calcTip() {
+            if (this.people > 0) {
+                this.peopleError = false;
+
+                if(this.customTip > 0){
+                    this.tip = this.customTip;
+                }
+
+                this.tipAmount = parseFloat(this.bill * this.tip / 100);
+                this.tipAmountPerPeople = parseFloat(this.tipAmount / this.people);
+
+                this.calcTotal();
+            } else {
+                this.peopleError = true;
+            }
+
+        },
+        calcTotal() {
+            this.total = (parseFloat(this.bill) + parseFloat(this.tipAmount)) / this.people;
+        },
+
+        reset(){
+        this.bill = null;
+        this.people = null;
+        this.tipAmount = 0;
+        this.customTip = null;
+        this.tipAmountPerPeople = 0;
+        this.total = 0;
+        }
+    }">
+        <div class="left-column">
+            <div class="bill-container">
+                <label for="bill">Bill</label>
+                <div class="input-container">
+                    <img src="images/icon-dollar.svg" alt="">
+                    <input type="text" class="input-field" name="bill" id="bill" x-model="bill" @change="calcTip()" placeholder="0">
+                </div>
+            </div>
+
+            <div class="tip-container">
+                <span>Select Tip %</span>
+
+                <div class="tip-selectors">
+                    <button title="5%" :class="tip === 5 ? 'selected' : ''" @click="tip = 5;calcTip()">5%</button>
+                    <button title="10%" :class="tip === 10 ? 'selected' : ''" @click="tip = 10;calcTip()">10%</button>
+                    <button title="15%" :class="tip === 15 ? 'selected' : ''" @click="tip = 15;calcTip()">15%</button>
+                    <button title="25%" :class="tip === 25 ? 'selected' : ''" @click="tip = 25;calcTip()">25%</button>
+                    <button title="50%" :class="tip === 50 ? 'selected' : ''" @click="tip = 50;calcTip()">50%</button>
+                    <label>
+                        <input type="text" title="Custom Tip" class="button-field" placeholder="Custom" x-model="customTip" @change.debounce="calcTip()">
+                    </label>
+                </div>
+            </div>
+
+            <div class="people-container">
+                <div class="label-container">
+                    <label for="people">Number of People</label>
+                    <span class="error-label" x-show="peopleError">Can't be zero</span>
+                </div>
+                <div class="input-container" :class="peopleError ? 'error' : ''">
+                    <img src="images/icon-person.svg" alt="">
+                    <input type="text" class="input-field" name="people" id="people" x-model="people" @change="calcTip()" placeholder="0">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div>
+                <div class="display-line">
+                    <div class="label">
+                        <span>Tip Amount</span>
+                        <span>/ person</span>
+                    </div>
+                    <div class="value" x-text="tipPerPeople">$0.00</div>
+                </div>
+
+                <div class="display-line">
+                    <div class="label">
+                        <span>Total</span>
+                        <span>/ person</span>
+                    </div>
+                    <div class="value" x-text="totalAmount">$0.00</div>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button title="Reset" class="reset-button" :disabled="resetStatus" @click="reset()">Reset</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>
