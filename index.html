@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
@@ -89,7 +89,7 @@
                     <button :class="tip === 15 ? 'selected' : ''" @click="tip = 15;calcTip()">15%</button>
                     <button :class="tip === 25 ? 'selected' : ''" @click="tip = 25;calcTip()">25%</button>
                     <button :class="tip === 50 ? 'selected' : ''" @click="tip = 50;calcTip()">50%</button>
-                    <input type="text" title="Custom Tip" class="button-field" placeholder="Custom" x-model="customTip" @change.debounce="calcTip()">
+                    <input type="text" title="Custom Tip" class="button-field" aria-label="Select Tip" placeholder="Custom" x-model="customTip" @change.debounce="calcTip()">
                 </div>
             </div>
 
