@@ -84,14 +84,12 @@
                 <span>Select Tip %</span>
 
                 <div class="tip-selectors">
-                    <button title="5%" :class="tip === 5 ? 'selected' : ''" @click="tip = 5;calcTip()">5%</button>
-                    <button title="10%" :class="tip === 10 ? 'selected' : ''" @click="tip = 10;calcTip()">10%</button>
-                    <button title="15%" :class="tip === 15 ? 'selected' : ''" @click="tip = 15;calcTip()">15%</button>
-                    <button title="25%" :class="tip === 25 ? 'selected' : ''" @click="tip = 25;calcTip()">25%</button>
-                    <button title="50%" :class="tip === 50 ? 'selected' : ''" @click="tip = 50;calcTip()">50%</button>
-                    <label>
-                        <input type="text" title="Custom Tip" class="button-field" placeholder="Custom" x-model="customTip" @change.debounce="calcTip()">
-                    </label>
+                    <button :class="tip === 5 ? 'selected' : ''" @click="tip = 5;calcTip()">5%</button>
+                    <button :class="tip === 10 ? 'selected' : ''" @click="tip = 10;calcTip()">10%</button>
+                    <button :class="tip === 15 ? 'selected' : ''" @click="tip = 15;calcTip()">15%</button>
+                    <button :class="tip === 25 ? 'selected' : ''" @click="tip = 25;calcTip()">25%</button>
+                    <button :class="tip === 50 ? 'selected' : ''" @click="tip = 50;calcTip()">50%</button>
+                    <input type="text" title="Custom Tip" class="button-field" placeholder="Custom" x-model="customTip" @change.debounce="calcTip()">
                 </div>
             </div>
 
